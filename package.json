@@ -9,5 +9,9 @@
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+  },
+  "dependencies": {
+    "three-text2d": "^0.6.0",
+    "troika-three-text": "^0.42.0"
   }
 }

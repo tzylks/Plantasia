@@ -1,0 +1,439 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 9800,
+      "max": [
+        247.10562133789062,
+        2.7907450203201734e-05,
+        576.79095458984375
+      ],
+      "min": [
+        -248.06536865234375,
+        -3.000049352645874,
+        -140.62472534179688
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 117600,
+      "componentType": 5126,
+      "count": 9800,
+      "max": [
+        0.9999956488609314,
+        1,
+        0.99999386072158813
+      ],
+      "min": [
+        -0.99999558925628662,
+        -1,
+        -0.99936407804489136
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 9800,
+      "max": [
+        0.85651975870132446,
+        0.99996566772460938,
+        0.0033935024403035641,
+        1
+      ],
+      "min": [
+        -0.85803782939910889,
+        -0.97359299659729004,
+        -1,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 9800,
+      "max": [
+        0.99950045347213745,
+        0.99950051307678223
+      ],
+      "min": [
+        0.00049954652786254883,
+        0.00049951672554016113
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 58752,
+      "max": [
+        9799
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 235200,
+      "componentType": 5126,
+      "count": 51632,
+      "max": [
+        383.177490234375,
+        47.994113922119141,
+        217.14556884765625
+      ],
+      "min": [
+        -125.05063629150391,
+        -17.006013870239258,
+        -514.2183837890625
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 854784,
+      "componentType": 5126,
+      "count": 51632,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 156800,
+      "componentType": 5126,
+      "count": 51632,
+      "max": [
+        1,
+        0.996265709400177,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -0.99521809816360474,
+        -1,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 78400,
+      "componentType": 5126,
+      "count": 51632,
+      "max": [
+        1.27881920337677,
+        1.4943857192993164
+      ],
+      "min": [
+        -0.27881920337677002,
+        -0.49438613653182983
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 235008,
+      "componentType": 5125,
+      "count": 266016,
+      "max": [
+        51631
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Zuo Modern (https://sketchfab.com/zuo)",
+      "license": "CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)",
+      "source": "https://sketchfab.com/models/32d499801804401f9587a0c18e5e7ab5",
+      "title": "Honeycomb Mirror Gold - A10980"
+    },
+    "generator": "Sketchfab-3.46.5",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1299072,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 491456,
+      "byteOffset": 1299072,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1474368,
+      "byteOffset": 1790528,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 982912,
+      "byteOffset": 3264896,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 4247808,
+      "uri": "mirror.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "mirror/10996_metallicRoughness.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "01_-_Default",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "10996",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8556051858,
+          0.54011146050000003,
+          0.28025133270000002,
+          1
+        ],
+        "metallicFactor": 1,
+        "metallicRoughnessTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "roughnessFactor": 0.57410905950000002
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cylinder023_01 - Default_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Box001_10996_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "adf3f8eaa0d04b999ac2f0bc3e713122.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5,
+        7
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        -1,
+        0,
+        0,
+        1,
+        2.2204460492503131e-16,
+        0,
+        -0.4813995361328125,
+        181.91249084472656,
+        100.19052886962891,
+        1
+      ],
+      "name": "A10980"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0.4798736572265625,
+        20.8448486328125,
+        -218.08479309082031,
+        1
+      ],
+      "name": "Cylinder023"
+    },
+    {
+      "mesh": 0,
+      "name": "Cylinder023_01 - Default_0"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -129.06343078613281,
+        -15.494049072265625,
+        148.53636169433594,
+        1
+      ],
+      "name": "Box001"
+    },
+    {
+      "mesh": 1,
+      "name": "Box001_10996_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
+
