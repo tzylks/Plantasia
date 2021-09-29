@@ -6,10 +6,13 @@ Rails.application.routes.draw do
   resources :user_carts
   resources :user_plants
   resources :plants
-  resources :users
+  resources :users do 
+    resources :poly_carts, only: [:show, :index, :destroy]
+  end
 
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   get '/sendit', to: 'outbound_sms#sendit'
   get '/nexmo', to: 'outbound_sms#nexmo'
   # Routing logic: fallback requests for React Router.

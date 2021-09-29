@@ -1,17 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Masonry from '@mui/lab/Masonry';
-import MasonryItem from '@mui/lab/MasonryItem';
 import Plant from './Plant'
-import Grow from '@mui/material/Grow';
-import { Parallax } from 'react-scroll-parallax';
-import { motion, useViewportScroll, useTransform } from "framer-motion";
 import PersistDrawer from './Drawer';
-import Header from './Header'
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import NavBar from './NavBar'
 import Grid from '@mui/material/Grid';
@@ -61,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function PlantsContainer({ setUserCart, userCart, plants, search, setSearch, currentUser }) {
+function PlantsContainer({ setPlants,  onLogout, setUserCart, userCart, plants, search, setSearch, currentUser }) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -72,14 +63,14 @@ function PlantsContainer({ setUserCart, userCart, plants, search, setSearch, cur
 
     return (
         <>
-            <Box style={{ position: 'fixed' }}>
-                <NavBar userCart={userCart} />
+            <Box style={{ position: 'fixed', zIndex: '1' }}>
+                <NavBar userCart={userCart} onLogout={onLogout} />
                 <Box style={{ height: '5vh', width: '100vw', background: '#224229', color: '#fcf9f3', position: 'relative' }}>
                     <Typography variant="h6" style={{ position: 'absolute', bottom: "0", center: '0', marginLeft: '38vw', lineHeight: '50px' }}>Free Shipping on Orders $75+ Shop Now</Typography>
                 </Box>
             </Box>
 
-            <PersistDrawer />
+            <PersistDrawer setPlants={setPlants} plants={plants} />
 
             <Box sx={{ marginLeft: '23vw' }}>
                 <Grid container>
@@ -112,7 +103,7 @@ function PlantsContainer({ setUserCart, userCart, plants, search, setSearch, cur
                     <Grid container style={{ marginTop: "6vh" }} >
                         {plants.map((plant) => (
                             <Grid item lg={4} xs={12} key={plant.id} columnSpan={1}>
-                                <Plant userCart={userCart} setUserCart={setUserCart} currentUser={currentUser} plant={plant} />
+                                <Plant search={search} userCart={userCart} setUserCart={setUserCart} currentUser={currentUser} plant={plant} />
                             </Grid>
                         ))}
                     </Grid>

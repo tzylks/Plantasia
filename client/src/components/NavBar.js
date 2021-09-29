@@ -6,8 +6,11 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import { Box, Button } from '@material-ui/core'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
 import Badge from '@mui/material/Badge';
 import * as React from 'react';
+
 
 
 
@@ -67,16 +70,11 @@ function NavBar({ userCart, onLogout }) {
   const classes = useStyles();
   const history = useHistory();
 
-  
-
-
-
-
   function onHandleLogout() {
     fetch('/logout', {
       method: 'DELETE',
     })
-      .then(() => onLogout())
+    onLogout()
   }
 
   return (
@@ -88,43 +86,53 @@ function NavBar({ userCart, onLogout }) {
 
         <AppBar position="absolute" style={{ background: "#fcf9f3", boxShadow: 'none', width: '100vw', marginTop: '5vh' }}>
           <Toolbar>
-            <Typography variant="h4" style={{ textDecoration: 'none', color: '#224229', padding: '0', marginLeft: '3vw', marginRight: '23vw' }}>
-              plantasia
-            </Typography>
+            <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
+              <Typography variant="h4" style={{ textDecoration: 'none', color: '#224229', padding: '0', marginLeft: '3vw', marginRight: '23vw' }}>
+                plantasia
+              </Typography>
+            </NavLink>
 
-          <Box style={{justifyContent: 'center'}}>
+            <Box style={{ justifyContent: 'center' }}>
 
-            <Button component={NavLink} to="/purchase_books">
-              <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
-                Books
-              </Typography>
-            </Button>
-            <Button component={NavLink} to="/purchase_plants">
-              <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
-                Plants
-              </Typography>
-            </Button>
-            <Button component={NavLink} to="/purchase_tools">
-              <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
-                Tools
-              </Typography>
-            </Button>
-            <Button component={NavLink} to="/cart" style={{ color: "#224229" }}>
-              <Typography variant="h6" style={{ marginRight: '30vw' }}>
-                Cart
-              </Typography>
-            </Button>
+              <Button component={NavLink} to="/purchase_books">
+                <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
+                  Books
+                </Typography>
+              </Button>
+              <Button component={NavLink} to="/purchase_plants">
+                <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
+                  Plants
+                </Typography>
+              </Button>
+              <Button component={NavLink} to="/purchase_tools">
+                <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
+                  Tools
+                </Typography>
+              </Button>
+              <Button component={NavLink} to="/cart" style={{ color: "#224229" }}>
+                <Typography variant="h6" style={{ marginRight: '20vw' }}>
+                  Cart
+                </Typography>
+              </Button>
 
             </Box>
 
+            <Button component={NavLink} to={"/login"}>
+              <PersonIcon />
+            </Button>
+
             <Button component={NavLink} to={"/cart"}>
-              <Badge badgeContent={userCart ? userCart.length: null} color="error">
-              <ShoppingCartRoundedIcon  style={{color: 'black'}} />
+              <Badge badgeContent={userCart ? userCart.length : null} color="error">
+                <ShoppingCartRoundedIcon style={{ color: 'black' }} />
               </Badge>
             </Button>
+
+            <Button onClick={onHandleLogout}>
+              <LogoutIcon />
+            </Button>
+
           </Toolbar>
         </AppBar>
-
 
       </div>
     </>

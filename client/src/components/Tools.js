@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -8,18 +7,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grow from '@mui/material/Grow';
 import Box from '@mui/material/Box';
-import { Parallax } from 'react-scroll-parallax';
-import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { ThemeProvider } from "@material-ui/core"
 import Theme from "./Theme.js"
+import {useState} from 'react'
 
 
 
 function Tools({ tool, currentUser, setUserCart, userCart }) {
-
+    const [addButton, setAddButton] = useState(false)
 
     function addToCart() {
-       
+
         fetch('/poly_carts', {
             method: 'POST',
             headers: {
@@ -29,11 +27,10 @@ function Tools({ tool, currentUser, setUserCart, userCart }) {
                 user_id: currentUser.id,
                 cartable_type: 'Tool',
                 cartable_id: tool.id
-             })
+            })
         })
-        .then(res => res.json())
-        .then(data => setUserCart([...userCart, data]))
-    
+            .then(res => res.json())
+            .then(data => setUserCart([...userCart, data]))
     }
 
     return (
@@ -48,16 +45,16 @@ function Tools({ tool, currentUser, setUserCart, userCart }) {
                             boxShadow: 'none'
                             // boxShadow: "10px 10px 20px 5px rgba(255,123,123,0.18)"
                         }}>
-                            <div>
+                            <Box style={{ position: 'relative' }} onMouseEnter={() => setAddButton(true)} onMouseOut={() => setAddButton(false)}>
                                 <CardMedia
                                     component="img"
                                     alt="Tool"
                                     height="350"
                                     image={tool.image}
                                 >
-                                    
                                 </CardMedia>
-                            </div>
+                                {addButton ? <Button variant="outlined" onMouseEnter={() => setAddButton(true)} onMouseOut={() => setAddButton(false)} onClick={addToCart} style={{ width: 280, background: "#f6cfb2", color: '#224229', position: 'absolute', top: '86%', left: '3.5%', borderRadius: 20, borderColor: '#224229', zIndex: '2' }}>Add to Cart</Button> : null}
+                            </Box>
                             <CardContent
                                 style={{ background: '#fcf9f3' }}
                             >
@@ -68,9 +65,6 @@ function Tools({ tool, currentUser, setUserCart, userCart }) {
                                     Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum Lorum Ipsum
                                 </Typography>
                             </CardContent>
-                            <CardActions style={{background: '#fcf9f3'}}>
-                            <Button onClick={addToCart} size="small" color="secondary">Add to Cart</Button>
-                        </CardActions>
                         </Card>
                     </Grow>
                 </Box>

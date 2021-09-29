@@ -19,9 +19,6 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Checkbox from '@mui/material/Checkbox';
-import PriceChangeIcon from '@mui/icons-material/PriceChange';
-import TitleIcon from '@mui/icons-material/Title';
-import LightModeIcon from '@mui/icons-material/LightMode';
 
 const useStyles = makeStyles({
   root: {
@@ -53,71 +50,45 @@ const useStyles = makeStyles({
 
 });
 
-function PersistDrawer({ setPlants, plants }) {
+function ToolDrawer({ setTools, tools }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const [openTwo, setOpenTwo] = React.useState(false);
-  const [openThree, setOpenThree] = React.useState(false);
-  const [openPrice, setOpenPrice] = React.useState(false);
   const [checkAlpha, setCheckAlpha] = React.useState(false);
   const [checkDesc, setCheckDesc] = React.useState(false);
-  
-  const originalPlants = [...plants]
-
-  console.log(originalPlants)
 
   const handleClick = () => {
     setOpen(!open);
-  };
-
-  const handleClickThree = () => {
-    setOpenThree(!openThree);
   };
 
   const handleClickTwo = () => {
     setOpenTwo(!openTwo);
   };
 
+  const handleCheckAlpha = () => {
+    setCheckAlpha(!checkAlpha);
+  };
 
-  function descSort() {
-    setPlants(originalPlants)
-    let descPlants = plants.sort((a, b) => b.name.localeCompare(a.name))
-    setPlants(descPlants)
-  }
+
+function descSort(){
+  let desc = tools.sort((a, b) => b.name.localeCompare(a.name))
+  setTools(desc)
+}
   function alphaSort() {
-    setPlants(originalPlants)
-    let alpha = plants.sort((a, b) => {
+    let alpha = tools.sort((a, b) => {
       if (a.name < b.name) { return -1; }
       if (a.name > b.name) { return 1; }
       return 0;
     })
 
-    setPlants(alpha)
+    setTools(alpha)
   }
-
-  function sortPrice() {
-    setPlants(originalPlants)
-    const price = plants.sort((a, b) => a.price.toString().localeCompare(b.price.toString()))
-    setPlants(price)
-  }
-
-  function sortPriceHigh() {
-    setPlants(originalPlants)
-    const price = plants.sort((a, b) => b.price.toString().localeCompare(a.price.toString()))
-    setPlants(price)
-  }
-
-  function sortLowLight() {
-    const newPlants = plants.filter(plant => plant.lighting === 'Low')
-    setPlants(newPlants)
-  }
- 
-
 
   return (
     <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '15%' }}>
       <Box style={{ position: 'relative', height: '30vh' }}>
+
 
         <List
 
@@ -127,9 +98,9 @@ function PersistDrawer({ setPlants, plants }) {
         >
           <ListItemButton onClick={handleClickTwo}>
             <ListItemIcon>
-              <TitleIcon />
+              <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="Name" />
+            <ListItemText primary="Title" />
             {openTwo ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={openTwo} timeout="auto" unmountOnExit>
@@ -168,9 +139,9 @@ function PersistDrawer({ setPlants, plants }) {
 
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <PriceChangeIcon />
+              <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="Price" />
+            <ListItemText primary="Inbox" />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -179,22 +150,7 @@ function PersistDrawer({ setPlants, plants }) {
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    onChange={() => sortPrice()}
-                    tabIndex={-1}
-                    disableRipple
-                    onClick={() => setOpenPrice(!openPrice)}
-                    checked={openPrice}
-                  // inputProps={{ 'aria-labelledby': labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="Low-High" />
-              </ListItemButton>
-
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    onChange={() => sortPriceHigh()}
+                    onChange={() => descSort()}
                     tabIndex={-1}
                     disableRipple
                     onClick={() => setCheckDesc(!checkDesc)}
@@ -202,51 +158,8 @@ function PersistDrawer({ setPlants, plants }) {
                   // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText primary="High-Low" />
+                <ListItemText primary="Starred" />
               </ListItemButton>
-
-            </List>
-          </Collapse>
-
-          <ListItemButton onClick={handleClickThree}>
-            <ListItemIcon>
-              <LightModeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Lighting" />
-            {openThree ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={openThree} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    onChange={() => sortLowLight()}
-                    tabIndex={-1}
-                    disableRipple
-                    onClick={() => setOpenPrice(!openPrice)}
-                    checked={openPrice}
-                  // inputProps={{ 'aria-labelledby': labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="Low Light" />
-              </ListItemButton>
-
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    onChange={() => sortPriceHigh()}
-                    tabIndex={-1}
-                    disableRipple
-                    onClick={() => setCheckDesc(!checkDesc)}
-                    checked={checkDesc}
-                  // inputProps={{ 'aria-labelledby': labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="High-Low" />
-              </ListItemButton>
-
             </List>
           </Collapse>
         </List>
@@ -280,4 +193,4 @@ function PersistDrawer({ setPlants, plants }) {
   )
 }
 
-export default PersistDrawer;
+export default ToolDrawer;

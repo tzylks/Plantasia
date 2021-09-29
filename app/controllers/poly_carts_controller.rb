@@ -9,6 +9,17 @@ class PolyCartsController < ApplicationController
         render json: user, status: :created
     end
 
+    def show 
+        user = PolyCart.find(params[:id])
+        render json: user
+    end
+
+    def destroy
+        cart = PolyCart.find(params[:id])
+        cart.destroy
+        head :no_content
+    end
+
     private
 
     def obj_params

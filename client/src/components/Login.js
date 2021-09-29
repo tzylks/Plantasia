@@ -61,7 +61,7 @@ export default function SignInSide({onLogin}) {
           }}
         />
        
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{background: '#fcf9f3'}}>
           <Box
             sx={{
               my: 8,
@@ -69,9 +69,10 @@ export default function SignInSide({onLogin}) {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              marginTop: '25vh'
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: '#224229' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -88,6 +89,7 @@ export default function SignInSide({onLogin}) {
                 required
                 autoComplete="email"
                 autoFocus
+                color="success"
               />
               <TextField
                 margin="normal"
@@ -99,24 +101,21 @@ export default function SignInSide({onLogin}) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                color="success"
               />
            
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                color="success"
+                sx={{ mt: 3, mb: 2}}
               >
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
-                  <Button component={NavLink} to="/signup" variant="body2">
+                  <Button variant="outlined" style={{marginLeft: '6vw', border: '1px solid #224229', borderRadius: 20}} component={NavLink} to="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Button>
                 </Grid>

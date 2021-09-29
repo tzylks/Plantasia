@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef  } from "react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Suspense } from "react";
-import { Environment, OrbitControls, PerspectiveCamera, Html, Shadow, useProgress } from "@react-three/drei";
-import { motion } from 'framer-motion'
+import { OrbitControls, Html  } from "@react-three/drei";
 import { useInView } from "react-intersection-observer";
-import { Card, CardContent, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { ThemeProvider } from "@material-ui/core"
 import Theme from './components/Theme'
 import { a, useTransition } from "@react-spring/web";
 import * as THREE from 'three'
-import { Text } from 'troika-three-text'
-import { MeshText2D, textAlign } from 'three-text2d'
-import {NavLink} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+
+
 
 
 
@@ -65,7 +64,6 @@ const Model = () => {
             <HTMLContent />
 
             <primitive ref={ref} position={[0, -62, -5]} object={gltf.scene} scale={.5} />
-
         </>
     );
 };
@@ -316,22 +314,23 @@ const Cat = () => {
 
 
 const HTMLContent = () => {
-
+    
     return (
 
         <Html occlude>
-
-            <ThemeProvider theme={Theme}>
-                <Grid Container>
-                    <Grid item lg={12} sm={12}>
-                    
-                        <Typography style={{ marginLeft: '-18vw', color: 'white', marginTop: '-10vh', fontSize: '10.4rem' }}>
-                            Plantasia
-                        </Typography>
-                       
+            <BrowserRouter>
+                <ThemeProvider theme={Theme}>
+                    <Grid Container>
+                        <Grid item lg={12} sm={12}>
+                           
+                                <Typography onClick={() => window.appHistory.push("/dashboard")} style={{ marginLeft: '-18vw', color: 'white', marginTop: '-10vh', fontSize: '10.4rem' }}>
+                                    Plantasia
+                                </Typography>
+                          
+                        </Grid>
                     </Grid>
-                </Grid>
-            </ThemeProvider>
+                </ThemeProvider>
+            </BrowserRouter>
         </Html>
 
     )
@@ -353,6 +352,7 @@ function Plants() {
 
     return (
         <>
+        
             <Canvas
                 shadowMap
                 camera={{ position: [0, -40, 20] }}
@@ -379,7 +379,6 @@ function Plants() {
 
                 <Suspense fallback={null}>
                     <Model />
-
                     <Door />
                     <GroundPlane />
                     <Grass />
@@ -396,7 +395,7 @@ function Plants() {
 
 
             </Canvas>
-
+      
         </>
     );
 }

@@ -1,17 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { InputBase } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
-import { NavLink, useHistory } from 'react-router-dom';
-import AlbumIcon from '@material-ui/icons/Album';
-import LoyaltySharpIcon from '@material-ui/icons/LoyaltySharp';
-import { IconButton } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react'
-import { Box, Button } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import Grid from '@mui/material/Grid';
 
 

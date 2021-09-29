@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { TextField } from '@material-ui/core'
 import * as React from 'react';
 
+
 const useStyles = makeStyles({
     list: {
         width: 450,
@@ -28,9 +29,9 @@ const useStyles = makeStyles({
     }
 });
 
-function Cart({ userCart }) {
+function Cart({ userCart, onDeleteItem }) {
     const classes = useStyles();
- 
+
     let CustomListItem = ({ to, primary }) => (
 
         <ListItem
@@ -58,7 +59,9 @@ function Cart({ userCart }) {
                             <Toolbar style={{ justifyContent: 'center' }}>
                                 <Grid continer>
                                     <Grid item xs={12} lg={12}>
-                                        <Typography variant="h3" style={{ justifyContent: 'center', color: "#224229" }}>plantasia</Typography>
+                                        <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
+                                            <Typography variant="h3" style={{ justifyContent: 'center', color: "#224229" }}>plantasia</Typography>
+                                        </NavLink>
                                     </Grid>
 
                                 </Grid>
@@ -69,22 +72,22 @@ function Cart({ userCart }) {
                         <Box style={{ width: '50vw', marginTop: '3vh', background: '#f6cfb2', height: '10vh' }}>
 
                             <Typography variant="h6" style={{ marginLeft: '2vw', paddingTop: '10px' }}>Returning Customer?</Typography>
-                            <Typography variant="h6" style={{ marginLeft: '2vw', padding: '2px', fontSize: '1rem'}}>Sign into your account</Typography>
+                            <Typography variant="h6" style={{ marginLeft: '2vw', padding: '2px', fontSize: '1rem' }}>Sign into your account</Typography>
                         </Box>
                         <TextField style={{ width: '50vw', marginTop: '3vh', borderColor: 'white' }} variant="outlined" required label="Email Address"></TextField>
-                        
-                        <Divider style={{ marginRight: '10vw', marginTop: '5vh' }} width="80%" />
-                
-                        <Box style={{marginTop: '10vh'}}>
-                        <Typography variant="h4" style={{ marginTop: '-6vh', color: "#224229" }}>Shipping Address</Typography>
 
-                        <TextField style={{ width: '25vw', marginTop: '3vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="First Name"></TextField>
-                        <TextField style={{ width: '25vw', marginTop: '3vh', borderColor: 'white', padding: '10px'  }} variant="outlined" required label="Last Name"></TextField>
-                        <TextField style={{ width: '50vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="Street Address"></TextField>
-                        <br />
-                        <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="City"></TextField>
-                        <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px'  }} variant="outlined" required label="State"></TextField>
-                        <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="Zip Code"></TextField>
+                        <Divider style={{ marginRight: '10vw', marginTop: '5vh' }} width="80%" />
+
+                        <Box style={{ marginTop: '10vh' }}>
+                            <Typography variant="h4" style={{ marginTop: '-6vh', color: "#224229" }}>Shipping Address</Typography>
+
+                            <TextField style={{ width: '25vw', marginTop: '3vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="First Name"></TextField>
+                            <TextField style={{ width: '25vw', marginTop: '3vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="Last Name"></TextField>
+                            <TextField style={{ width: '50vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="Street Address"></TextField>
+                            <br />
+                            <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="City"></TextField>
+                            <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="State"></TextField>
+                            <TextField style={{ width: '16vw', marginTop: '1vh', borderColor: 'white', padding: '10px' }} variant="outlined" required label="Zip Code"></TextField>
 
                         </Box>
                     </Box>
@@ -98,7 +101,7 @@ function Cart({ userCart }) {
                 <Box style={{ position: 'fixed' }}>
                     <Drawer variant="persistent" anchor='right' open={true} classes={{ paper: classes.paper }} >
                         <List className={classes.list}>
-                       
+
                             {userCart ? userCart.map(plant =>
                                 <>
                                     <Box style={{ display: 'flex', flexDirection: 'row' }}>
@@ -107,6 +110,11 @@ function Cart({ userCart }) {
 
                                         <Typography variant="h6" style={{ color: 'white', marginTop: '3vh' }}>{plant.cartable.name ? plant.cartable.name : plant.cartable.title}</Typography>
                                         <Typography variant="h5" style={{ color: 'white', marginTop: '3vh', right: '0', position: "absolute", marginRight: '3vw' }}>${plant.cartable.price}</Typography>
+                                        
+                                      
+                                        <Button onClick={()=> onDeleteItem(plant.id)} style={{right: "0", position: 'absolute', marginTop: "10vh", marginRight: '12vw', width: 120, background: "#f6cfb2", color: '#224229'}}>Remove</Button>
+                                        
+
                                     </Box>
 
                                     <hr style={{ color: 'white', width: '84%' }} />

@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { ParallaxProvider } from 'react-scroll-parallax'
+import { createBrowserHistory } from "history";
+
+
+const customHistory = createBrowserHistory({
+  // basename: config.urlBasename || ""
+});
 
 ReactDOM.render(
   <ParallaxProvider>
-    <BrowserRouter>
-      <App />
+    <BrowserRouter history={customHistory}>
+      <Route
+        component={({ history }) => {
+          window.appHistory = history;
+          return <App />;
+        }}
+      />
     </BrowserRouter>
   </ParallaxProvider>,
   document.getElementById('root')
