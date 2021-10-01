@@ -7,6 +7,8 @@ class OrdersController < ApplicationController
        items = @user.poly_carts.map(&:cartable)
        
        thing = items.inject(0){|sum,e| sum + e.price }
+
+       
          
         payment_intent = Stripe::PaymentIntent.create({
             amount: thing * 100,

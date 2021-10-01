@@ -142,8 +142,11 @@ function Cart({ userCart, onDeleteItem }) {
                         </Box>
                     </Box>
 
+                    <Divider style={{ marginLeft: '4vw', marginTop: '5vh' }} width="108%" />
+
                     <Box style={{marginLeft: '10vw', marginTop: '5vh'}}>
-                        <form id="payment-form" className="payform" onSubmit={handleSubmit}>
+                    <Typography variant="h4" style={{ marginTop: '4vh', marginLeft: '6vw', color: "#224229" }}>Payment Information</Typography>
+                        <form id="payment-form" className="payform" onSubmit={handleSubmit} style={{marginTop: '5vh'}}>
                             <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                             <button
                                 className='paybutton'

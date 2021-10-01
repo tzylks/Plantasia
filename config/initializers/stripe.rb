@@ -1,6 +1,6 @@
-Stripe.api_key = "sk_test_51JfS3kCTmOxoWVUUvx7KFpzIrXbW3EGZrbHjCNQpmViGW2MW3nbT1JBU0M2XuN4tRzygBeIQFV3ys1sNIleIyvyY00dYZNmIGV"
 
+Stripe.api_key = Rails.application.credentials.stripe[:public_key]
 require 'stripe'
 # This is your real test secret API key.
-Stripe.api_key = 'sk_test_51JfS3kCTmOxoWVUUvx7KFpzIrXbW3EGZrbHjCNQpmViGW2MW3nbT1JBU0M2XuN4tRzygBeIQFV3ys1sNIleIyvyY00dYZNmIGV'
+Stripe.api_key = Rails.application.credentials.stripe[:secret_key]
 
