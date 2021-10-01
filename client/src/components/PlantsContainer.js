@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function PlantsContainer({ setPlants,  onLogout, setUserCart, userCart, plants, search, setSearch, currentUser }) {
+function PlantsContainer({ lowLightSort, lowLight, setLowLight, setPlants,  onLogout, setUserCart, userCart, plants, search, setSearch, currentUser }) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -70,7 +70,7 @@ function PlantsContainer({ setPlants,  onLogout, setUserCart, userCart, plants, 
                 </Box>
             </Box>
 
-            <PersistDrawer setPlants={setPlants} plants={plants} />
+            <PersistDrawer setPlants={setPlants} plants={plants} lowLight={lowLight} setLowLight={setLowLight} lowLightSort={lowLightSort} />
 
             <Box sx={{ marginLeft: '23vw' }}>
                 <Grid container>

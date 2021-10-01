@@ -15,6 +15,10 @@ import Dashboard from "./components/Dashboard"
 import * as React from 'react';
 import ToolsContainer from './components/ToolsContainer'
 import BooksContainer from './components/BooksContainer'
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+const promise = loadStripe("pk_test_51JfS3kCTmOxoWVUUlzZyuddPX91ZTdpOLWvrNbOV6HAT09OkVJzHaD71grSZDPfdhmneAi1npVWqeyDrHJGhoW3G002lexmJoa");
+
 
 function Loader() {
   const { active, progress } = useProgress();
@@ -45,6 +49,7 @@ function App() {
   const [searchTools, setSearchTools] = useState('');
   const [searchBooks, setSearchBooks] = useState('');
   const [userCart, setUserCart] = useState(false)
+  const [lowLight, setLowLight] = useState(false)
 
 
 
@@ -54,6 +59,10 @@ function App() {
 
   function onLogout() {
     setCurrentUser(false)
+  }
+
+  const lowLightSort = () => {
+    setLowLight(!lowLight)
   }
 
   useEffect(() => {
@@ -94,6 +103,9 @@ function App() {
     });
   }, []);
 
+  const newPlants = plants.filter(plant => plant.lighting === 'Low')
+  console.log(newPlants)
+
   let plantsToDisplay = plants.filter((plant) =>
     plant.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -104,15 +116,7 @@ function App() {
     book.title.toLowerCase().includes(searchBooks.toLowerCase())
   );
 
- 
-  function sortPlantsPrice() {
-    plantsToDisplay.sort((a, b) => a.price.toString().localeCompare(b.price.toString()))
-  }
-
-
-  const newPlants = plantsToDisplay.filter(plant => plant.lighting === true)
   
-
   function onDeleteItem(id){
     fetch(`/users/${currentUser.id}/poly_carts/${id}`, {
       method: 'DELETE'
@@ -129,6 +133,7 @@ function App() {
 
   return (
     <>
+    <Elements stripe={promise}>
       <ThemeProvider theme={Theme}>
         <Switch>
           <Route
@@ -164,7 +169,7 @@ function App() {
           <Route
             path='/purchase_plants'
             component={() =>
-              <PlantsContainer setPlants={setPlants} onLogout={onLogout} search={search} setUserCart={setUserCart} userCart={userCart} currentUser={currentUser} search={search} setSearch={setSearch} plants={plantsToDisplay} />}
+              <PlantsContainer lowLightSort={lowLightSort} lowLight={lowLight} setLowLight={setLowLight} setPlants={setPlants} onLogout={onLogout} search={search} setUserCart={setUserCart} userCart={userCart} currentUser={currentUser} search={search} setSearch={setSearch} plants={lowLight ? newPlants : plantsToDisplay} />}
           />
           <Route
             path='/'
@@ -175,6 +180,7 @@ function App() {
         <Footer />
         <Loader />
       </ThemeProvider>
+      </Elements>
     </>
   );
 }

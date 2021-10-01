@@ -7,3 +7,4 @@ class User < ApplicationRecord
     has_many :books, through: :user_cart
     has_many :poly_carts
 end
+

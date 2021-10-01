@@ -19,6 +19,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Checkbox from '@mui/material/Checkbox';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
+import TitleIcon from '@mui/icons-material/Title';
+
 
 const useStyles = makeStyles({
   root: {
@@ -57,6 +60,7 @@ function BookDrawer({ books, setBooks }) {
   const [openTwo, setOpenTwo] = React.useState(false);
   const [checkAlpha, setCheckAlpha] = React.useState(false);
   const [checkDesc, setCheckDesc] = React.useState(false);
+  const [openPrice, setOpenPrice] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -71,10 +75,10 @@ function BookDrawer({ books, setBooks }) {
   };
 
 
-function descSort(){
-  let descBooks = books.sort((a, b) => b.title.localeCompare(a.title))
-  setBooks(descBooks)
-}
+  function descSort() {
+    let descBooks = books.sort((a, b) => b.title.localeCompare(a.title))
+    setBooks(descBooks)
+  }
   function alphaSort() {
     let alpha = books.sort((a, b) => {
       if (a.title < b.title) { return -1; }
@@ -85,21 +89,30 @@ function descSort(){
     setBooks(alpha)
   }
 
+  function sortPrice() {
+
+    const price = books.sort((a, b) => a.price.toString().localeCompare(b.price.toString()))
+    setBooks(price)
+  }
+
+  function sortPriceHigh() {
+    const price = books.sort((a, b) => b.price.toString().localeCompare(a.price.toString()))
+    setBooks(price)
+  }
 
   return (
-    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '15%' }}>
+    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '21%', marginLeft: '1vw' }}>
       <Box style={{ position: 'relative', height: '30vh' }}>
 
 
         <List
-
           sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
           <ListItemButton onClick={handleClickTwo}>
             <ListItemIcon>
-              <InboxIcon />
+              <TitleIcon />
             </ListItemIcon>
             <ListItemText primary="Title" />
             {openTwo ? <ExpandLess /> : <ExpandMore />}
@@ -140,9 +153,9 @@ function descSort(){
 
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <InboxIcon />
+              <PriceChangeIcon />
             </ListItemIcon>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary="Price" />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -151,7 +164,22 @@ function descSort(){
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    onChange={() => descSort()}
+                    onChange={() => sortPrice()}
+                    tabIndex={-1}
+                    disableRipple
+                    onClick={() => setOpenPrice(!openPrice)}
+                    checked={openPrice}
+                  // inputProps={{ 'aria-labelledby': labelId }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Low-High" />
+              </ListItemButton>
+
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    onChange={() => sortPriceHigh()}
                     tabIndex={-1}
                     disableRipple
                     onClick={() => setCheckDesc(!checkDesc)}
@@ -159,8 +187,9 @@ function descSort(){
                   // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText primary="Starred" />
+                <ListItemText primary="High-Low" />
               </ListItemButton>
+
             </List>
           </Collapse>
         </List>

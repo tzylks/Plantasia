@@ -19,6 +19,8 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Checkbox from '@mui/material/Checkbox';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
+import TitleIcon from '@mui/icons-material/Title';
 
 const useStyles = makeStyles({
   root: {
@@ -57,6 +59,7 @@ function ToolDrawer({ setTools, tools }) {
   const [openTwo, setOpenTwo] = React.useState(false);
   const [checkAlpha, setCheckAlpha] = React.useState(false);
   const [checkDesc, setCheckDesc] = React.useState(false);
+  const [openPrice, setOpenPrice] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -71,10 +74,10 @@ function ToolDrawer({ setTools, tools }) {
   };
 
 
-function descSort(){
-  let desc = tools.sort((a, b) => b.name.localeCompare(a.name))
-  setTools(desc)
-}
+  function descSort() {
+    let desc = tools.sort((a, b) => b.name.localeCompare(a.name))
+    setTools(desc)
+  }
   function alphaSort() {
     let alpha = tools.sort((a, b) => {
       if (a.name < b.name) { return -1; }
@@ -85,8 +88,20 @@ function descSort(){
     setTools(alpha)
   }
 
+
+  function sortPrice() {
+
+    const price = tools.sort((a, b) => a.price.toString().localeCompare(b.price.toString()))
+    setTools(price)
+  }
+
+  function sortPriceHigh() {
+    const price = tools.sort((a, b) => b.price.toString().localeCompare(a.price.toString()))
+    setTools(price)
+  }
+
   return (
-    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '15%' }}>
+    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '21%', marginLeft: '1vw' }}>
       <Box style={{ position: 'relative', height: '30vh' }}>
 
 
@@ -98,9 +113,9 @@ function descSort(){
         >
           <ListItemButton onClick={handleClickTwo}>
             <ListItemIcon>
-              <InboxIcon />
+              <TitleIcon />
             </ListItemIcon>
-            <ListItemText primary="Title" />
+            <ListItemText primary="Name" />
             {openTwo ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={openTwo} timeout="auto" unmountOnExit>
@@ -139,9 +154,9 @@ function descSort(){
 
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <InboxIcon />
+              <PriceChangeIcon />
             </ListItemIcon>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary="Price" />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -150,7 +165,22 @@ function descSort(){
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    onChange={() => descSort()}
+                    onChange={() => sortPrice()}
+                    tabIndex={-1}
+                    disableRipple
+                    onClick={() => setOpenPrice(!openPrice)}
+                    checked={openPrice}
+                  // inputProps={{ 'aria-labelledby': labelId }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Low-High" />
+              </ListItemButton>
+
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    onChange={() => sortPriceHigh()}
                     tabIndex={-1}
                     disableRipple
                     onClick={() => setCheckDesc(!checkDesc)}
@@ -158,8 +188,9 @@ function descSort(){
                   // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText primary="Starred" />
+                <ListItemText primary="High-Low" />
               </ListItemButton>
+
             </List>
           </Collapse>
         </List>

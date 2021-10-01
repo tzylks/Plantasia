@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  resources :orders 
   resources :poly_carts
   resources :tools
   resources :books
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/sendit', to: 'outbound_sms#sendit'
   get '/nexmo', to: 'outbound_sms#nexmo'
+  get '/payment', to: 'orders#payment'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

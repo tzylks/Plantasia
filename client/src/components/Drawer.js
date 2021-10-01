@@ -53,20 +53,18 @@ const useStyles = makeStyles({
 
 });
 
-function PersistDrawer({ setPlants, plants }) {
+function PersistDrawer({ setPlants, plants, lowLight, setLowLight, lowLightSort }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const [openTwo, setOpenTwo] = React.useState(false);
   const [openThree, setOpenThree] = React.useState(false);
   const [openPrice, setOpenPrice] = React.useState(false);
+
   const [checkAlpha, setCheckAlpha] = React.useState(false);
   const [checkDesc, setCheckDesc] = React.useState(false);
   
-  const originalPlants = [...plants]
-
-  console.log(originalPlants)
-
+  
   const handleClick = () => {
     setOpen(!open);
   };
@@ -81,12 +79,12 @@ function PersistDrawer({ setPlants, plants }) {
 
 
   function descSort() {
-    setPlants(originalPlants)
+    
     let descPlants = plants.sort((a, b) => b.name.localeCompare(a.name))
     setPlants(descPlants)
   }
   function alphaSort() {
-    setPlants(originalPlants)
+    
     let alpha = plants.sort((a, b) => {
       if (a.name < b.name) { return -1; }
       if (a.name > b.name) { return 1; }
@@ -97,31 +95,23 @@ function PersistDrawer({ setPlants, plants }) {
   }
 
   function sortPrice() {
-    setPlants(originalPlants)
+    
     const price = plants.sort((a, b) => a.price.toString().localeCompare(b.price.toString()))
     setPlants(price)
   }
 
   function sortPriceHigh() {
-    setPlants(originalPlants)
     const price = plants.sort((a, b) => b.price.toString().localeCompare(a.price.toString()))
     setPlants(price)
   }
 
-  function sortLowLight() {
-    const newPlants = plants.filter(plant => plant.lighting === 'Low')
-    setPlants(newPlants)
-  }
  
-
-
   return (
-    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '15%' }}>
+    <div style={{ marginTop: '37vh', height: '30vh', position: 'absolute', zIndex: '1', width: '21%', marginLeft: '1vw' }}>
       <Box style={{ position: 'relative', height: '30vh' }}>
-
+     
         <List
-
-          sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}
+          sx={{ width: '100%', maxWidth: 400, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
@@ -221,7 +211,6 @@ function PersistDrawer({ setPlants, plants }) {
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    onChange={() => sortLowLight()}
                     tabIndex={-1}
                     disableRipple
                     onClick={() => setOpenPrice(!openPrice)}
@@ -236,11 +225,10 @@ function PersistDrawer({ setPlants, plants }) {
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    onChange={() => sortPriceHigh()}
                     tabIndex={-1}
                     disableRipple
-                    onClick={() => setCheckDesc(!checkDesc)}
-                    checked={checkDesc}
+                    onClick={() => lowLightSort()}
+                    checked={lowLight}
                   // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>

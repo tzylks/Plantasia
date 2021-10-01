@@ -13,7 +13,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { TextField } from '@material-ui/core'
 import * as React from 'react';
-
+import { useState } from 'react'
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { useEffect } from 'react'
 
 const useStyles = makeStyles({
     list: {
@@ -32,19 +36,65 @@ const useStyles = makeStyles({
 function Cart({ userCart, onDeleteItem }) {
     const classes = useStyles();
 
-    let CustomListItem = ({ to, primary }) => (
+    const [succeeded, setSucceeded] = useState(false);
+    const [error, setError] = useState(null);
+    const [processing, setProcessing] = useState('');
+    const [disabled, setDisabled] = useState(true);
+    const [clientSecret, setClientSecret] = useState('');
 
-        <ListItem
-            button
-            component={NavLink}
-            to={to}
+    const stripe = useStripe();
+    const elements = useElements();
 
-        >
-            <ListItemText primary={primary} />
-        </ListItem>
+    const handleSubmit = async ev => {
+        ev.preventDefault();
+        setProcessing(true);
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement)
+            }
+        });
+        if (payload.error) {
+            setError(`Payment failed ${payload.error.message}`);
+            setProcessing(false);
+        } else {
+            setError(null);
+            setProcessing(false);
+            setSucceeded(true);
+        }
 
 
-    )
+    };
+
+    useEffect(() => {
+        fetch("/payment")
+            .then(res => res.json())
+            .then(data => setClientSecret(data.client_secret))
+    }, [])
+
+
+    const cardStyle = {
+        style: {
+            base: {
+                color: "#32325d",
+                fontFamily: 'Arial, sans-serif',
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                    color: "#32325d"
+                }
+            },
+            invalid: {
+                color: "#fa755a",
+                iconColor: "#fa755a"
+            }
+        }
+    };
+    const handleChange = async (event) => {
+        // Listen for changes in the CardElement
+        // and display any errors as the customer types their card details
+        setDisabled(event.empty);
+        setError(event.error ? event.error.message : "");
+    };
 
 
     return (
@@ -55,7 +105,7 @@ function Cart({ userCart, onDeleteItem }) {
             <Grid container>
                 <Grid item xs={6} lg={6}>
                     <Box style={{ width: '70vw', marginTop: '14vh', marginLeft: '4vw' }}>
-                        <AppBar style={{ background: "rgba(252, 249, 243, 1)", width: '100vw', marginRight: '20vw', height: '10vh', zIndex: "1" }}>
+                        <AppBar style={{ background: "rgba(252, 249, 243, 1)", width: '100vw', marginRight: '20vw', height: '10vh', zIndex: "2", boxShadow: 'none' }}>
                             <Toolbar style={{ justifyContent: 'center' }}>
                                 <Grid continer>
                                     <Grid item xs={12} lg={12}>
@@ -92,43 +142,95 @@ function Cart({ userCart, onDeleteItem }) {
                         </Box>
                     </Box>
 
+                    <Box style={{marginLeft: '10vw', marginTop: '5vh'}}>
+                        <form id="payment-form" className="payform" onSubmit={handleSubmit}>
+                            <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
+                            <button
+                                className='paybutton'
+                                disabled={processing || disabled || succeeded}
+                                id="submit"
+                            >
+                                <span id="button-text">
+                                    {processing ? (
+                                        <div className="spinner" id="spinner"></div>
+                                    ) : (
+                                        "Pay now"
+                                    )}
+                                </span>
+                            </button>
+                            {/* Show any error that happens when processing the payment */}
+                            {error && (
+                                <div className="card-error" role="alert">
+                                    {error}
+                                </div>
+                            )}
+                            {/* Show a success message upon completion */}
+                            {succeeded ?
+                                <p className="result-message">
+                                    Payment succeeded, see the result in your
+                                    <a
+                                        href={`https://dashboard.stripe.com/test/payments`}
+                                    >
+                                        {" "}
+                                        Stripe dashboard.
+                                    </a> Refresh the page to pay again.
+                                </p> : null}
+                        </form>
+
+                    </Box>
+
+                    {/* <form onSubmit={handleSubmit}>
+                            <label>
+                                Card details
+                                <CardElement
+                                    
+                                    onReady={() => {
+                                        console.log("CardElement [ready]");
+                                    }}
+                                    onChange={event => {
+                                        console.log("CardElement [change]", event);
+                                    }}
+                                    onBlur={() => {
+                                        console.log("CardElement [blur]");
+                                    }}
+                                    onFocus={() => {
+                                        console.log("CardElement [focus]");
+                                    }}
+                                />
+                            </label>
+                            <button type="submit" disabled={!stripe}>
+                                Pay
+                            </button>
+                        </form> */}
+
                 </Grid>
             </Grid>
 
 
-            <div style={{ height: '10vh', position: 'absolute', zIndex: '1' }}>
-
+            <div style={{ height: '10vh', position: 'absolute', zIndex: '3' }}>
                 <Box style={{ position: 'fixed' }}>
                     <Drawer variant="persistent" anchor='right' open={true} classes={{ paper: classes.paper }} >
                         <List className={classes.list}>
-
                             {userCart ? userCart.map(plant =>
                                 <>
                                     <Box style={{ display: 'flex', flexDirection: 'row' }}>
-
                                         <img style={{ width: '100px', height: '110px', padding: '30px' }} src={plant.cartable.image} alt="plant"></img>
-
                                         <Typography variant="h6" style={{ color: 'white', marginTop: '3vh' }}>{plant.cartable.name ? plant.cartable.name : plant.cartable.title}</Typography>
                                         <Typography variant="h5" style={{ color: 'white', marginTop: '3vh', right: '0', position: "absolute", marginRight: '3vw' }}>${plant.cartable.price}</Typography>
-                                        
-                                      
-                                        <Button onClick={()=> onDeleteItem(plant.id)} style={{right: "0", position: 'absolute', marginTop: "10vh", marginRight: '12vw', width: 120, background: "#f6cfb2", color: '#224229'}}>Remove</Button>
-                                        
-
+                                        <Button onClick={() => onDeleteItem(plant.id)} style={{ right: "0", position: 'absolute', marginTop: "10vh", marginRight: '12vw', width: 120, background: "#f6cfb2", color: '#224229' }}>Remove</Button>
                                     </Box>
 
                                     <hr style={{ color: 'white', width: '84%' }} />
                                 </>
                             )
                                 : <> <Divider /> <Typography variant="h3">There is nothing in your cart</Typography></>}
-
                         </List>
                         <br />
-                        <Button variant='outlined' style={{ background: '#fcf9f3', width: '18vw', height: '6vh', marginLeft: '3vw', color: '#224229' }}>Clear Filters</Button>
+                      
                     </Drawer>
                 </Box>
-
             </div>
+
         </>
     )
 }
