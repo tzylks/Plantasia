@@ -14,6 +14,7 @@ function Dashboard({ plants, userCart, onLogout }) {
 
     const sendText = () => {
         fetch('/sendit')
+        fetch('/email')
     }
 
 

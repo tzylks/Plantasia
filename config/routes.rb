@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/sendit', to: 'outbound_sms#sendit'
   get '/nexmo', to: 'outbound_sms#nexmo'
   get '/payment', to: 'orders#payment'
+  get '/email', to: 'users#email'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
