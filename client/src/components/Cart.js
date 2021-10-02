@@ -144,9 +144,9 @@ function Cart({ userCart, onDeleteItem }) {
 
                     <Divider style={{ marginLeft: '4vw', marginTop: '5vh' }} width="108%" />
 
-                    <Box style={{marginLeft: '10vw', marginTop: '5vh'}}>
-                    <Typography variant="h4" style={{ marginTop: '4vh', marginLeft: '6vw', color: "#224229" }}>Payment Information</Typography>
-                        <form id="payment-form" className="payform" onSubmit={handleSubmit} style={{marginTop: '5vh'}}>
+                    <Box style={{ marginLeft: '0vw', marginTop: '5vh', marginBottom: '-21vh', boxShadow: 'none' }}>
+                        <Typography variant="h4" style={{ marginTop: '4vh', marginLeft: '4vw', color: "#224229" }}>Payment Information</Typography>
+                        <form id="payment-form" className="payform" onSubmit={handleSubmit} style={{ marginTop: '5vh', border: 'none' }}>
                             <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                             <button
                                 className='paybutton'
@@ -182,7 +182,34 @@ function Cart({ userCart, onDeleteItem }) {
 
                     </Box>
 
-                    {/* <form onSubmit={handleSubmit}>
+                    <Box class="card" style={{marginTop: '-13vh', marginLeft: '39vw'}}>
+                        <Box class="card__front card__part">
+                            
+                              
+                                    <p class="card_numer" style={{marginTop: '9vh'}}>**** **** **** 6258</p>
+                                    <Box class="card__space-75">
+                                        <span class="card__label">Card holder</span>
+                                        <p class="card__info">John Doe</p>
+                                    </Box>
+                                    <Box class="card__space-25">
+                                        <span class="card__label">Expires</span>
+                                        <p class="card__info">10/25</p>
+                                    </Box>
+                                </Box>
+
+                                <Box class="card__back card__part">
+                                    <Box class="card__black-line"></Box>
+                                    <Box class="card__back-content">
+                                        <Box class="card__secret">
+                                            <p class="card__secret--last">420</p>
+                                        </Box>
+
+                                        </Box>
+                                    </Box>
+
+                                </Box>
+
+                                {/* <form onSubmit={handleSubmit}>
                             <label>
                                 Card details
                                 <CardElement
@@ -206,36 +233,36 @@ function Cart({ userCart, onDeleteItem }) {
                             </button>
                         </form> */}
 
-                </Grid>
-            </Grid>
+                            </Grid>
+                        </Grid>
 
 
-            <div style={{ height: '10vh', position: 'absolute', zIndex: '3' }}>
-                <Box style={{ position: 'fixed' }}>
-                    <Drawer variant="persistent" anchor='right' open={true} classes={{ paper: classes.paper }} >
-                        <List className={classes.list}>
-                            {userCart ? userCart.map(plant =>
-                                <>
-                                    <Box style={{ display: 'flex', flexDirection: 'row' }}>
-                                        <img style={{ width: '100px', height: '110px', padding: '30px' }} src={plant.cartable.image} alt="plant"></img>
-                                        <Typography variant="h6" style={{ color: 'white', marginTop: '3vh' }}>{plant.cartable.name ? plant.cartable.name : plant.cartable.title}</Typography>
-                                        <Typography variant="h5" style={{ color: 'white', marginTop: '3vh', right: '0', position: "absolute", marginRight: '3vw' }}>${plant.cartable.price}</Typography>
-                                        <Button onClick={() => onDeleteItem(plant.id)} style={{ right: "0", position: 'absolute', marginTop: "10vh", marginRight: '12vw', width: 120, background: "#f6cfb2", color: '#224229' }}>Remove</Button>
-                                    </Box>
+                        <div style={{ height: '10vh', position: 'absolute', zIndex: '3' }}>
+                            <Box style={{ position: 'fixed' }}>
+                                <Drawer variant="persistent" anchor='right' open={true} classes={{ paper: classes.paper }} >
+                                    <List className={classes.list}>
+                                        {userCart ? userCart.map(plant =>
+                                            <>
+                                                <Box style={{ display: 'flex', flexDirection: 'row' }}>
+                                                    <img style={{ width: '100px', height: '110px', padding: '30px' }} src={plant.cartable.image} alt="plant"></img>
+                                                    <Typography variant="h6" style={{ color: 'white', marginTop: '3vh' }}>{plant.cartable.name ? plant.cartable.name : plant.cartable.title}</Typography>
+                                                    <Typography variant="h5" style={{ color: 'white', marginTop: '3vh', right: '0', position: "absolute", marginRight: '3vw' }}>${plant.cartable.price}</Typography>
+                                                    <Button onClick={() => onDeleteItem(plant.id)} style={{ right: "0", position: 'absolute', marginTop: "10vh", marginRight: '12vw', width: 120, background: "#f6cfb2", color: '#224229' }}>Remove</Button>
+                                                </Box>
 
-                                    <hr style={{ color: 'white', width: '84%' }} />
-                                </>
-                            )
-                                : <> <Divider /> <Typography variant="h3">There is nothing in your cart</Typography></>}
-                        </List>
-                        <br />
-                      
-                    </Drawer>
-                </Box>
-            </div>
+                                                <hr style={{ color: 'white', width: '84%' }} />
+                                            </>
+                                        )
+                                            : <> <Divider /> <Typography variant="h3">There is nothing in your cart</Typography></>}
+                                    </List>
+                                    <br />
 
-        </>
-    )
+                                </Drawer>
+                            </Box>
+                        </div>
+
+                    </>
+                    )
 }
 
-export default React.memo(Cart);
+                    export default React.memo(Cart);
