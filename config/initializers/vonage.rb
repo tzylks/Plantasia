@@ -1,6 +1,6 @@
 Vonage.setup do |config|
-  config.api_key = ENV["VONAGE_API_KEY"]
-  config.api_secret = ENV["VONAGE_API_SECRET"]
+  config.api_key = Rails.application.credentials.vonage[:VONAGE_API_KEY]
+  config.api_secret = Rails.application.credentials.vonage[:VONAGE_API_SECRET]
 end
 
 # VONAGE_API_KEY = "352d7852"
