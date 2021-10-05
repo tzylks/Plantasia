@@ -63,10 +63,12 @@ function PlantsContainer({ lowLightSort, lowLight, setLowLight, setPlants,  onLo
 
     return (
         <>
-            <Box style={{ position: 'fixed', zIndex: '1' }}>
-                <NavBar userCart={userCart} onLogout={onLogout} />
-                <Box style={{ height: '5vh', width: '100vw', background: '#224229', color: '#fcf9f3', position: 'relative' }}>
-                    <Typography variant="h6" style={{ position: 'absolute', bottom: "0", center: '0', marginLeft: '38vw', lineHeight: '50px' }}>Free Shipping on Orders $75+ Shop Now</Typography>
+           <Box>
+                <Box style={{ position: 'fixed', width: "100%", top: '0', height: "10vh", background: "rgba(252, 249, 243, 1)", zIndex: '2' }}>
+                    <NavBar userCart={userCart} onLogout={onLogout} />
+                    <Box style={{ height: '5vh', width: '100vw', background: '#224229', color: '#fcf9f3', position: 'relative', zIndex: '2' }}>
+                        <Typography variant="h6" style={{ position: 'absolute', bottom: "0", center: '0', marginLeft: '40.7vw', lineHeight: '50px' }}>Free Shipping on Orders $100+</Typography>
+                    </Box>
                 </Box>
             </Box>
 

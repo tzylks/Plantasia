@@ -1,23 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { NavLink } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import * as React from 'react';
-import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Collapse from '@mui/material/Collapse';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
 import Checkbox from '@mui/material/Checkbox';
 import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import TitleIcon from '@mui/icons-material/Title';
@@ -207,19 +197,8 @@ function PersistDrawer({ setPlants, plants, lowLight, setLowLight, lowLightSort 
           </ListItemButton>
           <Collapse in={openThree} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    tabIndex={-1}
-                    disableRipple
-                    onClick={() => setOpenPrice(!openPrice)}
-                    checked={openPrice}
-                  // inputProps={{ 'aria-labelledby': labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="Low Light" />
-              </ListItemButton>
+             
+               
 
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
@@ -232,7 +211,7 @@ function PersistDrawer({ setPlants, plants, lowLight, setLowLight, lowLightSort 
                   // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText primary="High-Low" />
+                <ListItemText primary="Low Light" />
               </ListItemButton>
 
             </List>

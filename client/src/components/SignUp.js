@@ -20,6 +20,7 @@ import { useHistory, NavLink } from 'react-router-dom'
 function SignUp({ onLogin }) {
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState(null)
 
   const history = useHistory()
 
@@ -27,6 +28,7 @@ function SignUp({ onLogin }) {
     e.preventDefault()
     const newObj = {
       username: username,
+      email: email,
       password: password
     }
 
@@ -82,13 +84,27 @@ function SignUp({ onLogin }) {
             <Box component="form" noValidate onSubmit={e => onSubmitSignUp(e)} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
-                required
+                
                 fullWidth
                 placeholder="Username"
-                id="email"
+                id="username"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                required
+                required='true'
+                autoComplete="username"
+                autoFocus
+                color="success"
+                style={{ border: '10px', borderColor: '#224229' }}
+              />
+               <TextField
+                margin="normal"
+                
+                fullWidth
+                placeholder="Email"
+                id="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required='true'
                 autoComplete="email"
                 autoFocus
                 color="success"
@@ -96,10 +112,10 @@ function SignUp({ onLogin }) {
               />
               <TextField
                 margin="normal"
-                required
+                
                 fullWidth
                 color="success"
-                required
+                required='true'
                 placeholder="Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}

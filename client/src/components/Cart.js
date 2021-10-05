@@ -95,7 +95,7 @@ function Cart({ userCart, onDeleteItem }) {
         setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     };
-
+   
 
     return (
         <>
@@ -182,7 +182,7 @@ function Cart({ userCart, onDeleteItem }) {
 
                     </Box>
 
-                    <Box class="card" style={{marginTop: '-13vh', marginLeft: '39vw'}}>
+                    <Box class="card" style={{marginTop: '-13vh', marginLeft: '37vw'}}>
                         <Box class="card__front card__part">
                             
                               
@@ -209,30 +209,6 @@ function Cart({ userCart, onDeleteItem }) {
 
                                 </Box>
 
-                                {/* <form onSubmit={handleSubmit}>
-                            <label>
-                                Card details
-                                <CardElement
-                                    
-                                    onReady={() => {
-                                        console.log("CardElement [ready]");
-                                    }}
-                                    onChange={event => {
-                                        console.log("CardElement [change]", event);
-                                    }}
-                                    onBlur={() => {
-                                        console.log("CardElement [blur]");
-                                    }}
-                                    onFocus={() => {
-                                        console.log("CardElement [focus]");
-                                    }}
-                                />
-                            </label>
-                            <button type="submit" disabled={!stripe}>
-                                Pay
-                            </button>
-                        </form> */}
-
                             </Grid>
                         </Grid>
 
@@ -241,8 +217,10 @@ function Cart({ userCart, onDeleteItem }) {
                             <Box style={{ position: 'fixed' }}>
                                 <Drawer variant="persistent" anchor='right' open={true} classes={{ paper: classes.paper }} >
                                     <List className={classes.list}>
-                                        {userCart ? userCart.map(plant =>
+                                        {userCart ? userCart.map(plant => {
+                                        return(
                                             <>
+                                                
                                                 <Box style={{ display: 'flex', flexDirection: 'row' }}>
                                                     <img style={{ width: '100px', height: '110px', padding: '30px' }} src={plant.cartable.image} alt="plant"></img>
                                                     <Typography variant="h6" style={{ color: 'white', marginTop: '3vh' }}>{plant.cartable.name ? plant.cartable.name : plant.cartable.title}</Typography>
@@ -252,6 +230,9 @@ function Cart({ userCart, onDeleteItem }) {
 
                                                 <hr style={{ color: 'white', width: '84%' }} />
                                             </>
+                                        )
+                                        
+                                            }
                                         )
                                             : <> <Divider /> <Typography variant="h3">There is nothing in your cart</Typography></>}
                                     </List>

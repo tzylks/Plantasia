@@ -206,7 +206,7 @@ input {
     display: inline-block;
       width: 320px;
       height: 190px;
-      background-image: linear-gradient(to right bottom, #005200, #0ba12c, #357245, #026322, #087a38); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+      background-image: linear-gradient(to right bottom, #f6cfb2, #fcc69e, #fadec8, #ffc498, #f1b485); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -230,6 +230,7 @@ input {
   }
   
   .card__back {
+    width: 25vw;
     padding: 18px 0;
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);

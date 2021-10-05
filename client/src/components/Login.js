@@ -44,7 +44,7 @@ export default function SignInSide({onLogin}) {
 
   return (
   <div style={{background: 'black', height:'100vh', width: '100vw'}}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '115vh' }}>
         <CssBaseline />
         <Grid
           item

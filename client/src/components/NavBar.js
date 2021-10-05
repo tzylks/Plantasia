@@ -3,13 +3,24 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Box, Button } from '@material-ui/core'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import Badge from '@mui/material/Badge';
 import * as React from 'react';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Checkbox from '@mui/material/Checkbox';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
+import TitleIcon from '@mui/icons-material/Title';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 
 
@@ -67,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 function NavBar({ userCart, onLogout }) {
   const [hoverMe, setHoverMe] = useState(false)
   const [cartItems, setCartItems] = useState(false)
+  const [openTwo, setOpenTwo] = React.useState(false);
   const classes = useStyles();
   const history = useHistory();
 
@@ -76,6 +88,11 @@ function NavBar({ userCart, onLogout }) {
     })
     onLogout()
   }
+
+  const handleClickTwo = () => {
+    setOpenTwo(!openTwo);
+  };
+
 
   return (
     <>
@@ -92,7 +109,7 @@ function NavBar({ userCart, onLogout }) {
               </Typography>
             </NavLink>
 
-            <Box style={{ justifyContent: 'center' }}>
+            <Box style={{ justifyContent: 'center', marginLeft: '2.8vw' }}>
 
               <Button component={NavLink} to="/purchase_books">
                 <Typography variant="h6" style={{ color: "#224229", paddingRight: '20px' }}>
@@ -109,14 +126,12 @@ function NavBar({ userCart, onLogout }) {
                   Tools
                 </Typography>
               </Button>
-              <Button component={NavLink} to="/cart" style={{ color: "#224229" }}>
-                <Typography variant="h6" style={{ marginRight: '20vw' }}>
-                  Cart
-                </Typography>
-              </Button>
 
             </Box>
 
+
+            
+          <Box style={{marginLeft: '22vw'}}>
             <Button component={NavLink} to={"/login"}>
               <PersonIcon />
             </Button>
@@ -130,6 +145,7 @@ function NavBar({ userCart, onLogout }) {
             <Button onClick={onHandleLogout}>
               <LogoutIcon />
             </Button>
+          </Box>
 
           </Toolbar>
         </AppBar>

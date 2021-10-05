@@ -6,5 +6,9 @@ class User < ApplicationRecord
     has_many :tools, through: :user_cart
     has_many :books, through: :user_cart
     has_many :poly_carts
+    validates :username, presence: true
+    validates :password, presence: true
+    validates :email, presence: true
+    validates :username, uniqueness: true
 end
 

@@ -144,7 +144,7 @@ function App() {
           <Route
             path='/dashboard'
             component={() =>
-              <Dashboard plants={plants} userCart={userCart} onLogout={onLogout} />}
+              <Dashboard plants={plants} userCart={userCart} onLogout={onLogout} currentUser={currentUser} />}
           />
           <Route
             path='/purchase_tools'

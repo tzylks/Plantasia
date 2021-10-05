@@ -10,7 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import { NavLink } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 
-function Dashboard({ plants, userCart, onLogout }) {
+function Dashboard({ plants, userCart, onLogout, currentUser }) {
 
     const sendText = () => {
         fetch('/sendit')
@@ -150,13 +150,14 @@ function Dashboard({ plants, userCart, onLogout }) {
                 <Grid item lg={12} sm={12}>
                     <Box width="100%" style={{ marginBottom: '-10vh', marginTop: '8vh', height: '70vh', position: 'relative', zIndex: '0', display: 'block', backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/10/07/12/29/books-2826380_1280.jpg")' }}>
                         <Box style={{ marginTop: '1vh', background: '#f8f1e3', width: '30vw', height: '70vh', position: 'absolute', bottom: '0vh', right: 0, marginTop: '30vh', zIndex: '1' }}>
-                            <Typography variant="h3" style={{ padding: '10px', marginTop: '14vh', marginLeft: '5vw', color: '#224229' }}>Subscribe</Typography>
-                            <Divider width="75%" style={{ marginLeft: '1vw' }} />
+                            <Typography variant="h3" style={{ padding: '10px', marginTop: '20vh', marginLeft: '7vw', color: '#224229' }}>Subscribe</Typography>
+                            <Divider width="75%" style={{ marginLeft: '3vw' }} />
                             <Typography variant="h5" style={{ marginTop: '2vh', marginLeft: '2vw', marginRight: '1vw' }}>Opt in to receieve alerts about our newest products and gain early access to our exclusive sales. </Typography>
                             <Box style={{ marginLeft: '1vw', marginTop: '4vw', display: 'flex' }}>
                                 <form onSubmit={sendText} style={{flexDirection: 'column'}}>
-                                    <TextField placeholder="Phone Number"></TextField>
-                                    <Button variant='outlined' style={{ padding: '0px', background: '#f6cfb2', width: '10vw', height: '6vh', marginLeft: '1vw', color: '#224229', marginTop: '0vh', border: 'none' }} type='submit'>Submit</Button>
+                                    
+                                    <Button variant='outlined' style={{ padding: '0px', background: '#f6cfb2', width: '15vw', height: '6vh', marginLeft: '5vw', color: '#224229', marginTop: '0vh', border: 'none' }} type='submit'>Yes, please!</Button>
+                                    <Typography variant="h6" style={{ marginTop: '2vh', marginLeft: '2vw', marginRight: '1vw', fontSize: '16px', marginLeft: '3.4vw' }}>(Must be logged in to use this feature)</Typography>
                                 </form>
                             </Box>
                         </Box>
