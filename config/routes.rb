@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  resources :tools
   resources :orders 
   resources :poly_carts
-  resources :tools
   resources :books
   resources :user_carts
   resources :user_plants
